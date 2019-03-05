@@ -1,0 +1,58 @@
+Linux for beginners: Process management in Linux
+===============================================
+
+Commands you will be familiar with this tutorial:
+
+ps --> It is one of the important utilities for system administration under process monitoring
+
+kill --> kill command in Linux is a built-in command which is used to terminate processes manually. 
+
+
+
+
+Let’s go to how "ps" command is used in day to day monitoring operations
+
+1. List All Processes in Current Shell
+	ps
+
+2. Display every active process on a Linux system
+	ps -Af or ps -ef
+
+3. Dispaly the processes owned by you
+	ps -x 
+
+4. Display every processes running with root user privileges
+	ps -U root -u root 
+
+5. Display processes owned by a certain group (real group ID (RGID) or name)
+	ps -fG apache
+	ps -fG 48
+
+6. Display processes by PID
+	ps -fp 1178
+
+7. Display process by PPID
+	ps -f --ppid 1154
+
+8. Print process Tree
+	ps -e --forest 
+	ps -f --forest -C sshd
+
+9. Show custom output format of a specefic PID with pid,ppid,fgroup,ni,lstart,etime
+	ps -p 1154 -o pid,ppid,fgroup,ni,lstart,etime
+
+
+10. Find a process name using its PID.
+	ps -p 1154 -o comm=
+
+11. Find top running processes by highest memory and CPU usage
+	ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+	ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+
+12. To kill a Linux processes/unresponsive applications or any process that is consuming high CPU time.
+	First, find the PID of the unresponsive process or application.
+	ps -A | grep -i stress
+	kill -9 2583 2584
+
+13. Perform Real-time Process Monitoring Using Watch Utility
+	watch -n 1 'ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
